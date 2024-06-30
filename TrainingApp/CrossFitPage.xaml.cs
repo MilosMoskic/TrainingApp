@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -6,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TrainingApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CrossFitPage.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class CrossFitPage : Window
     {
-        public Dashboard()
+        public CrossFitPage()
         {
             InitializeComponent();
         }
@@ -45,11 +48,18 @@ namespace TrainingApp
             }
         }
 
-        private void Navigate_To_CrossFitPage(object sender, EventArgs e)
+        private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage();
+            Dashboard objDashboardPage = new Dashboard();
             this.Close();
-            objCrossFitPage.Show();
+            objDashboardPage.Show();
+        }
+
+        private void Navigate_To_AddWodPage(object sender, EventArgs e)
+        {
+            AddWodPage objAddWodPage = new AddWodPage();
+            this.Close();
+            objAddWodPage.Show();
         }
     }
 }

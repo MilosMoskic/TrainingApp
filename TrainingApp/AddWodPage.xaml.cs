@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -6,19 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TrainingApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddWodPage.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class AddWodPage : Window
     {
-        public Dashboard()
+        public AddWodPage()
         {
             InitializeComponent();
+        }
+
+        private void Return_To_CrossFitPage(object sender, EventArgs e)
+        {
+            CrossFitPage objCrossFitPage = new CrossFitPage();
+            this.Close();
+            objCrossFitPage.Show();
         }
 
         private void CloseApp(object sender, MouseButtonEventArgs e)
@@ -43,13 +53,6 @@ namespace TrainingApp
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void Navigate_To_CrossFitPage(object sender, EventArgs e)
-        {
-            CrossFitPage objCrossFitPage = new CrossFitPage();
-            this.Close();
-            objCrossFitPage.Show();
         }
     }
 }
