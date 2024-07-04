@@ -25,6 +25,8 @@ namespace TrainingApp
         private readonly IWodService _wodService;
         public CrossFitPage(IWodService wodService)
         {
+            if (wodService == null) throw new ArgumentNullException(nameof(wodService));
+
             _wodService = wodService;
             InitializeComponent();
             PopulateWods();
@@ -32,12 +34,20 @@ namespace TrainingApp
 
         private void PopulateWods()
         {
-            List<Wod> wods = _wodService.GetAllWods(); // Assuming GetAllWods() fetches data from repository
-            foreach (var wod in wods)
+            try
             {
-                UCWods ucWod = new UCWods();
-                ucWod.DataContext = wod; // Set DataContext of each UCWods instance to a Wod object
-                WodsListView.Items.Add(ucWod); // Assuming WodsListView is your ListView in XAML
+                List<Wod> wods = _wodService.GetAllWods(); // Assuming GetAllWods() fetches data from repository
+                foreach (var wod in wods)
+                {
+                    UCWods ucWod = new UCWods(_wodService);
+                    ucWod.DataContext = wod; // Set DataContext of each UCWods instance to a Wod object
+                    ucWod.ParentWindow = this;
+                    WodsListView.Items.Add(ucWod); // Add UCWods to the ListView
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while populating WODs: {ex.Message}");
             }
         }
 

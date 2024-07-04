@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrainingApp.Aplication.Interfaces;
+using TrainingApp.Domain.Models;
 
 namespace TrainingApp.UIComponents
 {
@@ -20,15 +22,29 @@ namespace TrainingApp.UIComponents
     /// </summary>
     public partial class UCWods : UserControl
     {
-        public UCWods()
+        private readonly IWodService _wodService;
+        public UCWods(IWodService wodService)
         {
+            _wodService = wodService;
             InitializeComponent();
             DataContext = this;
         }
 
+        public Window ParentWindow { get; set; }
         public string Time { get; set; }
         public string Day { get; set; }
         public string Type { get; set; }
         public string Reps { get; set; }
+
+        private void UCWod_Click(object sender, MouseButtonEventArgs e)
+        {
+            Wod selectedWod = DataContext as Wod;
+            if (selectedWod != null)
+            {
+                WodDetailsPage wodDetailsPage = new WodDetailsPage(selectedWod, _wodService);
+                wodDetailsPage.Show();
+                ParentWindow.Close();
+            }
+        }
     }
 }
