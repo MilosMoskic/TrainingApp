@@ -85,7 +85,7 @@
             </ComboBox.Background>
         </ComboBox>
         <Label Content="Day:" HorizontalAlignment="Left" Margin="288,92,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" Width="46" FontSize="16"/>
-        <ComboBox HorizontalAlignment="Left" Margin="400,134,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FF77B0AA">
+        <ComboBox x:Name="Typecbx" HorizontalAlignment="Left" Margin="400,134,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FF77B0AA">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -95,7 +95,7 @@
         </ComboBox>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="288,125,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="288,156,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
-        <DatePicker HorizontalAlignment="Left" Margin="400,163,0,0" VerticalAlignment="Top" Width="120">
+        <DatePicker x:Name="Datedp" HorizontalAlignment="Left" Margin="400,163,0,0" VerticalAlignment="Top" Width="120">
             <DatePicker.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
                     <GradientStop Color="#FFA3AEB9"/>
@@ -106,13 +106,13 @@
             </DatePicker.BorderBrush>
         </DatePicker>
         <Label Content="WOD:" HorizontalAlignment="Left" Margin="288,182,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
-        <TextBox HorizontalAlignment="Left" Margin="400,198,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="122"/>
+        <TextBox x:Name="WODtxt" HorizontalAlignment="Left" Margin="400,198,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Height="122"/>
 
         <Label Content="Time:" HorizontalAlignment="Left" Margin="288,318,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
         <Label Content="Reps:" HorizontalAlignment="Left" Margin="288,343,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
-        <TextBox HorizontalAlignment="Left" Margin="400,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="400,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Style="{DynamicResource ButtonStyle1}" Content="Add" HorizontalAlignment="Center" Margin="0,407,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43"/>
+        <TextBox x:Name="Timetxt" HorizontalAlignment="Left" Margin="400,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Repstxt" HorizontalAlignment="Left" Margin="400,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Style="{DynamicResource ButtonStyle1}" Content="Add" HorizontalAlignment="Center" Margin="0,407,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="AddWod_Click"/>
         <Button Style="{DynamicResource ButtonStyle1}" Content="Return" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="Return_To_CrossFitPage"/>
     </Grid>
 </Window>

@@ -8,16 +8,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrainingApp.Aplication.Interfaces;
 
 namespace TrainingApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
     public partial class Dashboard : Window
     {
-        public Dashboard()
+        private readonly IWodService _wodService;
+        public Dashboard(IWodService wodService)
         {
+            _wodService = wodService;
             InitializeComponent();
         }
 
@@ -47,7 +50,7 @@ namespace TrainingApp
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage();
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
             this.Close();
             objCrossFitPage.Show();
         }

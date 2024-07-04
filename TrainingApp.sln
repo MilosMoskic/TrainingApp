@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingApp", "TrainingApp\TrainingApp.csproj", "{D82ACFDB-32CC-4113-AADC-0A81CE86E7BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingApp.Infastructure", "TrainingApp.Infastructure\TrainingApp.Infastructure.csproj", "{CF5835F3-4E6D-4499-AD20-9F4BFC010469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingApp.Infastructure", "TrainingApp.Infastructure\TrainingApp.Infastructure.csproj", "{CF5835F3-4E6D-4499-AD20-9F4BFC010469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingApp.Domain", "TrainingApp.Domain\TrainingApp.Domain.csproj", "{7C0D73AF-18A9-47F7-9515-A2C3A8364701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingApp.Domain", "TrainingApp.Domain\TrainingApp.Domain.csproj", "{7C0D73AF-18A9-47F7-9515-A2C3A8364701}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingApp.Application", "TrainingApp.Application\TrainingApp.Application.csproj", "{7248E26B-B79B-4970-A6A0-9FC85DABCE85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingApp.Aplication", "TrainingApp.Application\TrainingApp.Aplication.csproj", "{7248E26B-B79B-4970-A6A0-9FC85DABCE85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

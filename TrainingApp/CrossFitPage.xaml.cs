@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TrainingApp.Aplication.Interfaces;
 
 namespace TrainingApp
 {
@@ -19,8 +20,10 @@ namespace TrainingApp
     /// </summary>
     public partial class CrossFitPage : Window
     {
-        public CrossFitPage()
+        private readonly IWodService _wodService;
+        public CrossFitPage(IWodService wodService)
         {
+            _wodService = wodService;
             InitializeComponent();
         }
 
@@ -50,14 +53,14 @@ namespace TrainingApp
 
         private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
-            Dashboard objDashboardPage = new Dashboard();
+            Dashboard objDashboardPage = new Dashboard(_wodService);
             this.Close();
             objDashboardPage.Show();
         }
 
         private void Navigate_To_AddWodPage(object sender, EventArgs e)
         {
-            AddWodPage objAddWodPage = new AddWodPage();
+            AddWodPage objAddWodPage = new AddWodPage(_wodService);
             this.Close();
             objAddWodPage.Show();
         }
