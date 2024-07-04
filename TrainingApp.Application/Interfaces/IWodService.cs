@@ -5,5 +5,6 @@ namespace TrainingApp.Aplication.Interfaces
     public interface IWodService
     {
         Wod CreateWod(Wod wod);
+        List<Wod> GetAllWods();
     }
 }

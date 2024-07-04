@@ -23,6 +23,12 @@ namespace TrainingApp.UIComponents
         public UCWods()
         {
             InitializeComponent();
+            DataContext = this;
         }
+
+        public string Time { get; set; }
+        public string Day { get; set; }
+        public string Type { get; set; }
+        public string Reps { get; set; }
     }
 }

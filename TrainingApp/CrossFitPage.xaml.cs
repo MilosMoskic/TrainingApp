@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrainingApp.Aplication.Interfaces;
+using TrainingApp.Domain.Models;
+using TrainingApp.UIComponents;
 
 namespace TrainingApp
 {
@@ -25,6 +27,18 @@ namespace TrainingApp
         {
             _wodService = wodService;
             InitializeComponent();
+            PopulateWods();
+        }
+
+        private void PopulateWods()
+        {
+            List<Wod> wods = _wodService.GetAllWods(); // Assuming GetAllWods() fetches data from repository
+            foreach (var wod in wods)
+            {
+                UCWods ucWod = new UCWods();
+                ucWod.DataContext = wod; // Set DataContext of each UCWods instance to a Wod object
+                WodsListView.Items.Add(ucWod); // Assuming WodsListView is your ListView in XAML
+            }
         }
 
         private void CloseApp(object sender, MouseButtonEventArgs e)

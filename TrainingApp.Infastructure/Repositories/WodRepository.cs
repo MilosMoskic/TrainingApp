@@ -1,4 +1,5 @@
-﻿using TrainingApp.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using TrainingApp.Domain.Interfaces;
 using TrainingApp.Domain.Models;
 using TrainingApp.Infastructure.Context;
 
@@ -18,6 +19,11 @@ namespace TrainingApp.Infastructure.Repositories
             _trainingContext.SaveChanges();
 
             return wod;
+        }
+
+        public IQueryable<Wod> GetAllWods()
+        {
+            return _trainingContext.Wods.AsQueryable();
         }
     }
 }

@@ -20,5 +20,11 @@ namespace TrainingApp.Aplication.Services
 
             return wod;
         }
+
+        public List<Wod> GetAllWods()   
+        {
+            return _wodRepository.GetAllWods()
+                .ToList();
+        }
     }
 }
