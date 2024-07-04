@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ namespace TrainingApp
             _wodService = wodService;
             InitializeComponent();
 
-            string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+            string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Saturday" };
             string[] comboType = new[] { "For Time", "EMOM", "AMRAP", "Dt" };
 
             Daycbx.ItemsSource = comboDay;
@@ -37,27 +38,32 @@ namespace TrainingApp
 
         public void AddWod_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Wod wod = new();
+            var validationService = App.ServiceProvider.GetRequiredService<IValidationService>();
 
-                wod.Day = Daycbx.Text;
-                wod.Type = Typecbx.Text;
-                wod.Date = DateTime.Parse(Datedp.Text);
-                wod.WOD = WODtxt.Text;
-                wod.Time = Timetxt.Text;
+            if (!validationService.ValidateWodForm(Daycbx.Text, Typecbx.Text, Datedp.Text, WODtxt.Text, out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            Wod wod = new();
+
+            wod.Day = Daycbx.Text;
+            wod.Type = Typecbx.Text;
+            wod.Date = DateTime.Parse(Datedp.Text);
+            wod.WOD = WODtxt.Text;
+            wod.Time = Timetxt.Text;
+
+            if(Repstxt.Text == null)
+            {
                 wod.Reps = Int32.Parse(Repstxt.Text);
-
-                _wodService.CreateWod(wod);
-
-                MessageBox.Show("Wod added successfully.");
-
-                ClearForm();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+                
+            _wodService.CreateWod(wod);
+
+            MessageBox.Show("Wod added successfully.");
+
+            ClearForm();
         }
 
         private void Return_To_CrossFitPage(object sender, EventArgs e)
