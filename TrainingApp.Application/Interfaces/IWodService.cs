@@ -6,5 +6,7 @@ namespace TrainingApp.Aplication.Interfaces
     {
         Wod CreateWod(Wod wod);
         List<Wod> GetAllWods();
+        Wod UpdateWod(Wod wod);
+        bool DeleteWod(Wod wod);
     }
 }

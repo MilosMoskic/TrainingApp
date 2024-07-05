@@ -26,5 +26,17 @@ namespace TrainingApp.Aplication.Services
             return _wodRepository.GetAllWods()
                 .ToList();
         }
+
+        public Wod UpdateWod(Wod wod)
+        {
+            wod.ModifiedAt = DateTime.Now;
+            return _wodRepository.UpdateWod(wod);
+        }
+
+        public bool DeleteWod(Wod wod)
+        {
+            _wodRepository.DeleteWod(wod);
+            return true;
+        }
     }
 }

@@ -25,5 +25,25 @@ namespace TrainingApp.Infastructure.Repositories
         {
             return _trainingContext.Wods.AsQueryable();
         }
+
+        public Wod GetWod(int id)
+        {
+            return _trainingContext.Wods.FirstOrDefault(w => w.Id == id);
+        }
+
+        public Wod UpdateWod(Wod wod)
+        {
+            _trainingContext.Update(wod);
+            _trainingContext.SaveChanges();
+
+            return wod;
+        }
+
+        public bool DeleteWod(Wod wod)
+        {
+            _trainingContext.Wods.Remove(wod);
+            _trainingContext.SaveChanges();
+            return true;
+        }
     }
 }

@@ -30,6 +30,32 @@ namespace TrainingApp
             DataContext = wod;
         }
 
+        private void DeleteWod_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is Wod wod)
+            {
+                _wodService.DeleteWod(wod);
+                Return_To_CrossFitPage(sender, e);
+            }
+        }
+
+        private void UpdateWod_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is Wod wod)
+            {
+                UpdateWodPage objUpdateWodPage = new UpdateWodPage(wod, _wodService);
+                this.Close();
+                objUpdateWodPage.Show();
+            }
+        }
+
+        private void Return_To_CrossFitPage(object sender, EventArgs e)
+        {
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
+            this.Close();
+            objCrossFitPage.Show();
+        }
+
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
             try
@@ -52,13 +78,6 @@ namespace TrainingApp
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void Return_To_CrossFitPage(object sender, EventArgs e)
-        {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
-            this.Close();
-            objCrossFitPage.Show();
         }
     }
 }

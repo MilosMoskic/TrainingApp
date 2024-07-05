@@ -29,7 +29,7 @@ namespace TrainingApp
             _wodService = wodService;
             InitializeComponent();
 
-            string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Saturday" };
+            string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Friday", "Saturday" };
             string[] comboType = new[] { "For Time", "EMOM", "AMRAP", "Dt" };
 
             Daycbx.ItemsSource = comboDay;
