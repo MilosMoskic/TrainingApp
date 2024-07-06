@@ -44,16 +44,16 @@ namespace TrainingApp
             if (DataContext is Wod wod)
             {
                 UpdateWodPage objUpdateWodPage = new UpdateWodPage(wod, _wodService);
-                this.Close();
                 objUpdateWodPage.Show();
+                this.Close();
             }
         }
 
         private void Return_To_CrossFitPage(object sender, EventArgs e)
         {
             CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
-            this.Close();
             objCrossFitPage.Show();
+            this.Close();
         }
 
         private void CloseApp(object sender, MouseButtonEventArgs e)

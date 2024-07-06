@@ -78,8 +78,8 @@ namespace TrainingApp
             if (DataContext is Wod wod)
             {
                 WodDetailsPage objCrossFitPage = new WodDetailsPage(wod, _wodService);
-                this.Close();
                 objCrossFitPage.Show();
+                this.Close();
             }
         }
 

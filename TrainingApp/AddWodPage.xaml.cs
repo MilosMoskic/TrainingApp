@@ -69,8 +69,8 @@ namespace TrainingApp
         private void Return_To_CrossFitPage(object sender, EventArgs e)
         {
             CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
-            this.Close();
             objCrossFitPage.Show();
+            this.Close();
         }
 
         private void ClearForm()

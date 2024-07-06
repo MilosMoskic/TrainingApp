@@ -78,15 +78,15 @@ namespace TrainingApp
         private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
             Dashboard objDashboardPage = new Dashboard(_wodService);
-            this.Close();
             objDashboardPage.Show();
+            this.Close();
         }
 
         private void Navigate_To_AddWodPage(object sender, EventArgs e)
         {
             AddWodPage objAddWodPage = new AddWodPage(_wodService);
-            this.Close();
             objAddWodPage.Show();
+            this.Close();
         }
     }
 }

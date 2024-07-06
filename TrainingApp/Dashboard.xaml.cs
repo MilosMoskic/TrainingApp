@@ -51,8 +51,8 @@ namespace TrainingApp
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
             CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
-            this.Close();
             objCrossFitPage.Show();
+            this.Close();
         }
     }
 }
