@@ -42,7 +42,10 @@ namespace TrainingApp
             
             services.AddScoped<IWodRepository, WodRepository>();
             services.AddScoped<IWodService, WodService>();
-            services.AddScoped<IValidationService, ValidationService>();
+            services.AddScoped<IRunningSessionRepository, RunningSessionRepository>();
+            services.AddScoped<IRunningSessionService, RunningSessionService>();
+            services.AddScoped<IWodValidationService, WodValidationService>();
+            services.AddScoped<IRunningSessionValidationService, RunningSessionValidationService>();
             services.AddTransient<Dashboard>();
             services.AddTransient<AddWodPage>();
         }

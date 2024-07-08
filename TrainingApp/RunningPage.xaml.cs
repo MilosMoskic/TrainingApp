@@ -18,38 +18,36 @@ using TrainingApp.UIComponents;
 namespace TrainingApp
 {
     /// <summary>
-    /// Interaction logic for CrossFitPage.xaml
+    /// Interaction logic for RunningPage.xaml
     /// </summary>
-    public partial class CrossFitPage : Window
+    public partial class RunningPage : Window
     {
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public CrossFitPage(IWodService wodService, IRunningSessionService runningSessionService)
+        public RunningPage(IRunningSessionService runningSessionService, IWodService wodService)
         {
-            if (wodService == null) throw new ArgumentNullException(nameof(wodService));
-
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             InitializeComponent();
-            PopulateWods();
+            PopulateRunningSessions();
         }
 
-        private void PopulateWods()
+        private void PopulateRunningSessions()
         {
             try
             {
-                List<Wod> wods = _wodService.GetAllWods(); // Assuming GetAllWods() fetches data from repository
-                foreach (var wod in wods)
+                List<RunningSession> runningSessions = _runningSessionService.GetAllRunningSessions(); // Assuming GetAllWods() fetches data from repository
+                foreach (var runningSession in runningSessions)
                 {
-                    UCWods ucWod = new UCWods(_wodService, _runningSessionService);
-                    ucWod.DataContext = wod; // Set DataContext of each UCWods instance to a Wod object
-                    ucWod.ParentWindow = this;
-                    WodsListView.Items.Add(ucWod); // Add UCWods to the ListView
+                    UCRunningSession ucRunningSession = new UCRunningSession(_runningSessionService, _wodService);
+                    ucRunningSession.DataContext = runningSession; // Set DataContext of each UCWods instance to a Wod object
+                    //ucRunningSession.ParentWindow = this;
+                    RunningSessionsListView.Items.Add(ucRunningSession); // Add UCWods to the ListView
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while populating WODs: {ex.Message}");
+                MessageBox.Show($"An error occurred while populating Running Sessions: {ex.Message}");
             }
         }
 
@@ -60,17 +58,17 @@ namespace TrainingApp
             this.Close();
         }
 
-        private void Navigate_To_AddWodPage(object sender, EventArgs e)
+        private void Navigate_To_CrossFitPage(object sender, RoutedEventArgs e)
         {
-            AddWodPage objAddWodPage = new AddWodPage(_wodService, _runningSessionService);
-            objAddWodPage.Show();
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService);
+            objCrossFitPage.Show();
             this.Close();
         }
 
-        private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
+        private void Navigate_To_AddRunningSession(object sender, RoutedEventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService,_wodService);
-            objRunningPage.Show();
+            AddRunningPage objAddRunningPage = new AddRunningPage(_runningSessionService, _wodService);
+            objAddRunningPage.Show();
             this.Close();
         }
 

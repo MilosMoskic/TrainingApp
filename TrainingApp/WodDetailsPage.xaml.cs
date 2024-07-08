@@ -22,9 +22,11 @@ namespace TrainingApp
     /// </summary>
     public partial class WodDetailsPage : Window
     {
+        private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public WodDetailsPage(Wod wod, IWodService wodService)
+        public WodDetailsPage(Wod wod, IWodService wodService, IRunningSessionService runningSessionService)
         {
+            _runningSessionService = runningSessionService;
             _wodService = wodService;
             InitializeComponent();
             DataContext = wod;
@@ -43,7 +45,7 @@ namespace TrainingApp
         {
             if (DataContext is Wod wod)
             {
-                UpdateWodPage objUpdateWodPage = new UpdateWodPage(wod, _wodService);
+                UpdateWodPage objUpdateWodPage = new UpdateWodPage(wod, _wodService, _runningSessionService);
                 objUpdateWodPage.Show();
                 this.Close();
             }
@@ -51,7 +53,7 @@ namespace TrainingApp
 
         private void Return_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService);
             objCrossFitPage.Show();
             this.Close();
         }

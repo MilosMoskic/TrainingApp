@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="TrainingApp.UIComponents.UCRunningSession"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrainingApp.UIComponents"
+             mc:Ignorable="d" 
+             Height="57">
+    <Grid>
+        <Rectangle HorizontalAlignment="Stretch" Height="57" VerticalAlignment="Center" Fill="#FF003C43" RadiusX="12" RadiusY="12"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <Rectangle Height="57" Margin="147,0,0,0" VerticalAlignment="Center" Width="54" RadiusX="12" RadiusY="12" Fill="#FF135D66"/>
+        </StackPanel>
+
+        <Label Content="Time(mins):" HorizontalAlignment="Left" Width="62" Foreground="#FFE3FEF7" FontSize="10" Margin="0,-4,0,38"/>
+        <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="59,-2,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+
+        <Label Content="Distance(km):" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10" Margin="0,10,0,0"/>
+        <Label Content="{Binding Distance}" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+
+        <Label Content="Location:" HorizontalAlignment="Left" Margin="0,22,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+        <Label Content="{Binding Location}" HorizontalAlignment="Left" Margin="48,22,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+
+        <Label Content="Cal:" HorizontalAlignment="Left" Margin="0,36,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+        <Label Content="{Binding Cal}" HorizontalAlignment="Left" Margin="23,36,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+        <Label Content="Delete" HorizontalAlignment="Left" Margin="153,0,0,0" VerticalAlignment="Center" Foreground="Red" MouseLeftButtonDown="DeleteRunningSession"/>
+
+    </Grid>
+</UserControl>

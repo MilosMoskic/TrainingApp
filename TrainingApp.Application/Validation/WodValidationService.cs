@@ -2,7 +2,7 @@
 
 namespace TrainingApp.Aplication.Validation
 {
-    public class ValidationService : IValidationService
+    public class WodValidationService : IWodValidationService
     {
         public bool ValidateWodForm(string dayComboBox, string typeComboBox, string datePicker, string wodTextBox, out string errorMessage)
         {

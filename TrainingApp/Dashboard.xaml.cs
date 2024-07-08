@@ -17,9 +17,11 @@ namespace TrainingApp
     /// </summary>
     public partial class Dashboard : Window
     {
+        private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public Dashboard(IWodService wodService)
+        public Dashboard(IWodService wodService, IRunningSessionService runningSessionService)
         {
+            _runningSessionService = runningSessionService;
             _wodService = wodService;
             InitializeComponent();
         }
@@ -50,8 +52,15 @@ namespace TrainingApp
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService);
             objCrossFitPage.Show();
+            this.Close();
+        }
+
+        private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
+        {
+            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService);
+            objRunningPage.Show();
             this.Close();
         }
     }

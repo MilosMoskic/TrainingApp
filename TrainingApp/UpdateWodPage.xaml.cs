@@ -11,10 +11,11 @@ namespace TrainingApp
 {
     public partial class UpdateWodPage : Window
     {
+        private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-
-        public UpdateWodPage(Wod wod, IWodService wodService)
+        public UpdateWodPage(Wod wod, IWodService wodService, IRunningSessionService runningSessionService)
         {
+            _runningSessionService = runningSessionService;
             _wodService = wodService;
 
             InitializeComponent();
@@ -46,7 +47,7 @@ namespace TrainingApp
         {
             if (DataContext is Wod wod)
             {
-                var validationService = App.ServiceProvider.GetRequiredService<IValidationService>();
+                var validationService = App.ServiceProvider.GetRequiredService<IWodValidationService>();
 
                 if (!validationService.ValidateWodForm(Daycbx.Text, Typecbx.Text, Datedp.Text, WODtxt.Text, out string errorMessage))
                 {
@@ -77,7 +78,7 @@ namespace TrainingApp
         {
             if (DataContext is Wod wod)
             {
-                WodDetailsPage objCrossFitPage = new WodDetailsPage(wod, _wodService);
+                WodDetailsPage objCrossFitPage = new WodDetailsPage(wod, _wodService, _runningSessionService);
                 objCrossFitPage.Show();
                 this.Close();
             }

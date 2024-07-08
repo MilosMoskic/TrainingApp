@@ -22,9 +22,11 @@ namespace TrainingApp.UIComponents
     /// </summary>
     public partial class UCWods : UserControl
     {
+        private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public UCWods(IWodService wodService)
+        public UCWods(IWodService wodService, IRunningSessionService runningSessionService)
         {
+            _runningSessionService = runningSessionService;
             _wodService = wodService;
             InitializeComponent();
             DataContext = this;
@@ -41,7 +43,7 @@ namespace TrainingApp.UIComponents
             Wod selectedWod = DataContext as Wod;
             if (selectedWod != null)
             {
-                WodDetailsPage wodDetailsPage = new WodDetailsPage(selectedWod, _wodService);
+                WodDetailsPage wodDetailsPage = new WodDetailsPage(selectedWod, _wodService, _runningSessionService);
                 wodDetailsPage.Show();
                 ParentWindow.Close();
             }

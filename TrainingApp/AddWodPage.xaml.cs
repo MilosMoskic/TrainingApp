@@ -23,9 +23,11 @@ namespace TrainingApp
     /// </summary>
     public partial class AddWodPage : Window
     {
+        private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public AddWodPage(IWodService wodService)
+        public AddWodPage(IWodService wodService, IRunningSessionService runningSessionService)
         {
+            _runningSessionService = runningSessionService;
             _wodService = wodService;
             InitializeComponent();
 
@@ -38,7 +40,7 @@ namespace TrainingApp
 
         public void AddWod_Click(object sender, RoutedEventArgs e)
         {
-            var validationService = App.ServiceProvider.GetRequiredService<IValidationService>();
+            var validationService = App.ServiceProvider.GetRequiredService<IWodValidationService>();
 
             if (!validationService.ValidateWodForm(Daycbx.Text, Typecbx.Text, Datedp.Text, WODtxt.Text, out string errorMessage))
             {
@@ -68,7 +70,7 @@ namespace TrainingApp
 
         private void Return_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService);
             objCrossFitPage.Show();
             this.Close();
         }
