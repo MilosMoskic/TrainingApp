@@ -31,6 +31,12 @@ namespace TrainingApp.UIComponents
             _wodService = wodService;
             InitializeComponent();
             DataContext = this;
+            Loaded += UCRunningSession_Loaded;
+        }
+
+        private void UCRunningSession_Loaded(object sender, RoutedEventArgs e)
+        {
+            ParentWindow = Window.GetWindow(this);
         }
 
         public Window ParentWindow { get; set; }
@@ -49,7 +55,7 @@ namespace TrainingApp.UIComponents
                     _runningSessionService.DeleteRunningSession(runningSession);
                     RunningPage runningPage = new RunningPage(_runningSessionService, _wodService);
                     runningPage.Show();
-                    ParentWindow.Close();
+                    ParentWindow?.Close();
                 }
             }
         }
