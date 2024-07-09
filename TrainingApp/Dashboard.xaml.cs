@@ -19,13 +19,35 @@ namespace TrainingApp
     {
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public Dashboard(IWodService wodService, IRunningSessionService runningSessionService)
+        private readonly IWeightService _weightService;
+        public Dashboard(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
+            _weightService = weightService;
             InitializeComponent();
         }
 
+        private void Navigate_To_CrossFitPage(object sender, EventArgs e)
+        {
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService);
+            objCrossFitPage.Show();
+            this.Close();
+        }
+
+        private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
+        {
+            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService);
+            objRunningPage.Show();
+            this.Close();
+        }
+
+        private void Navigate_ToWeight_Page(object sender, RoutedEventArgs e)
+        {
+            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService);
+            objWeightPage.Show();
+            this.Close();
+        }
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
             try
@@ -48,20 +70,6 @@ namespace TrainingApp
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void Navigate_To_CrossFitPage(object sender, EventArgs e)
-        {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService);
-            objCrossFitPage.Show();
-            this.Close();
-        }
-
-        private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
-        {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService);
-            objRunningPage.Show();
-            this.Close();
         }
     }
 }

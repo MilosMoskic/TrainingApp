@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,45 +14,74 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Domain.Models;
-using TrainingApp.UIComponents;
 
 namespace TrainingApp
 {
     /// <summary>
-    /// Interaction logic for RunningPage.xaml
+    /// Interaction logic for WeightPage.xaml
     /// </summary>
-    public partial class RunningPage : Window
+    public partial class WeightPage : Window
     {
-        private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
+        private readonly IRunningSessionService _runningSessionService;
         private readonly IWeightService _weightService;
-        public RunningPage(IRunningSessionService runningSessionService, IWodService wodService, IWeightService weightService)
+        public WeightPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService)
         {
-            _runningSessionService = runningSessionService;
             _wodService = wodService;
+            _runningSessionService = runningSessionService;
             _weightService = weightService;
             InitializeComponent();
-            PopulateRunningSessions();
+            updateDataGrid();
         }
 
-        private void PopulateRunningSessions()
+        private void updateDataGrid()
+        {
+            var weights = _weightService.GetAllWeights();
+            WeightsDataGrid.ItemsSource = weights;
+        }
+
+        private void AddWeight_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                List<RunningSession> runningSessions = _runningSessionService.GetAllRunningSessions(); // Assuming GetAllWods() fetches data from repository
-                foreach (var runningSession in runningSessions)
+                if (decimal.TryParse(Weighttxt.Text, out decimal weight))
                 {
-                    UCRunningSession ucRunningSession = new UCRunningSession(_runningSessionService, _wodService, _weightService);
-                    ucRunningSession.DataContext = runningSession; // Set DataContext of each UCWods instance to a Wod object
-                    //ucRunningSession.ParentWindow = this;
-                    RunningSessionsListView.Items.Add(ucRunningSession); // Add UCWods to the ListView
+                    _weightService.CreateWeight(new Weight { WeightAmount = weight });
+                    updateDataGrid();
+                    Weighttxt.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid weight.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while populating Running Sessions: {ex.Message}");
+                MessageBox.Show($"Error adding weight: {ex.Message}");
             }
         }
+
+        private void DeleteWeight_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (WeightsDataGrid.SelectedItem is Weight selectedWeight)
+                {
+                    var weightToDelete = _weightService.GetWeight(selectedWeight.Id);
+                    _weightService.DeleteWeight(weightToDelete);
+                    updateDataGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a weight to delete.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting weight: {ex.Message}");
+            }
+        }
+
 
         private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
@@ -60,17 +90,10 @@ namespace TrainingApp
             this.Close();
         }
 
-        private void Navigate_To_CrossFitPage(object sender, RoutedEventArgs e)
+        private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
             CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService);
             objCrossFitPage.Show();
-            this.Close();
-        }
-
-        private void Navigate_To_AddRunningSession(object sender, RoutedEventArgs e)
-        {
-            AddRunningPage objAddRunningPage = new AddRunningPage(_runningSessionService, _wodService, _weightService);
-            objAddRunningPage.Show();
             this.Close();
         }
 
@@ -78,13 +101,6 @@ namespace TrainingApp
         {
             RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService);
             objRunningPage.Show();
-            this.Close();
-        }
-
-        private void Navigate_ToWeight_Page(object sender, RoutedEventArgs e)
-        {
-            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService);
-            objWeightPage.Show();
             this.Close();
         }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrainingApp.Infastructure.Context;
 
@@ -11,9 +12,11 @@ using TrainingApp.Infastructure.Context;
 namespace TrainingApp.Infastructure.Migrations
 {
     [DbContext(typeof(TrainingContext))]
-    partial class TrainingContextModelSnapshot : ModelSnapshot
+    [Migration("20240709140405_Added weight entity in database")]
+    partial class Addedweightentityindatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

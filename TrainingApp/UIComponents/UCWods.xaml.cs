@@ -24,10 +24,12 @@ namespace TrainingApp.UIComponents
     {
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public UCWods(IWodService wodService, IRunningSessionService runningSessionService)
+        private readonly IWeightService _weightService;
+        public UCWods(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
+            _weightService = weightService;
             InitializeComponent();
             DataContext = this;
         }
@@ -43,7 +45,7 @@ namespace TrainingApp.UIComponents
             Wod selectedWod = DataContext as Wod;
             if (selectedWod != null)
             {
-                WodDetailsPage wodDetailsPage = new WodDetailsPage(selectedWod, _wodService, _runningSessionService);
+                WodDetailsPage wodDetailsPage = new WodDetailsPage(selectedWod, _wodService, _runningSessionService, _weightService);
                 wodDetailsPage.Show();
                 ParentWindow.Close();
             }

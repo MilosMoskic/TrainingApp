@@ -46,6 +46,8 @@ namespace TrainingApp
             services.AddScoped<IRunningSessionService, RunningSessionService>();
             services.AddScoped<IWodValidationService, WodValidationService>();
             services.AddScoped<IRunningSessionValidationService, RunningSessionValidationService>();
+            services.AddScoped<IWeightRepository, WeightRepository>();
+            services.AddScoped<IWeightService, WeightService>();
             services.AddTransient<Dashboard>();
             services.AddTransient<AddWodPage>();
         }

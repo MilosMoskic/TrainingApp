@@ -25,10 +25,12 @@ namespace TrainingApp
     {
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public AddWodPage(IWodService wodService, IRunningSessionService runningSessionService)
+        private readonly IWeightService _weightService;
+        public AddWodPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
+            _weightService = weightService;
             InitializeComponent();
 
             string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Friday", "Saturday" };
@@ -70,7 +72,7 @@ namespace TrainingApp
 
         private void Return_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService);
             objCrossFitPage.Show();
             this.Close();
         }

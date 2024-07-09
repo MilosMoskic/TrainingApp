@@ -24,12 +24,14 @@ namespace TrainingApp
     {
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
-        public CrossFitPage(IWodService wodService, IRunningSessionService runningSessionService)
+        private readonly IWeightService _weightService;
+        public CrossFitPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService)
         {
             if (wodService == null) throw new ArgumentNullException(nameof(wodService));
 
             _runningSessionService = runningSessionService;
             _wodService = wodService;
+            _weightService = weightService;
             InitializeComponent();
             PopulateWods();
         }
@@ -41,7 +43,7 @@ namespace TrainingApp
                 List<Wod> wods = _wodService.GetAllWods(); // Assuming GetAllWods() fetches data from repository
                 foreach (var wod in wods)
                 {
-                    UCWods ucWod = new UCWods(_wodService, _runningSessionService);
+                    UCWods ucWod = new UCWods(_wodService, _runningSessionService, _weightService);
                     ucWod.DataContext = wod; // Set DataContext of each UCWods instance to a Wod object
                     ucWod.ParentWindow = this;
                     WodsListView.Items.Add(ucWod); // Add UCWods to the ListView
@@ -55,22 +57,29 @@ namespace TrainingApp
 
         private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
-            Dashboard objDashboardPage = new Dashboard(_wodService, _runningSessionService);
+            Dashboard objDashboardPage = new Dashboard(_wodService, _runningSessionService, _weightService);
             objDashboardPage.Show();
             this.Close();
         }
 
         private void Navigate_To_AddWodPage(object sender, EventArgs e)
         {
-            AddWodPage objAddWodPage = new AddWodPage(_wodService, _runningSessionService);
+            AddWodPage objAddWodPage = new AddWodPage(_wodService, _runningSessionService, _weightService);
             objAddWodPage.Show();
             this.Close();
         }
 
         private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService,_wodService);
+            RunningPage objRunningPage = new RunningPage(_runningSessionService,_wodService, _weightService);
             objRunningPage.Show();
+            this.Close();
+        }
+
+        private void Navigate_ToWeight_Page(object sender, RoutedEventArgs e)
+        {
+            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService);
+            objWeightPage.Show();
             this.Close();
         }
 

@@ -26,10 +26,12 @@ namespace TrainingApp
     {
         private readonly IWodService _wodService;
         private readonly IRunningSessionService _runningSessionService;
-        public AddRunningPage(IRunningSessionService runningSessionService, IWodService wodService)
+        private readonly IWeightService _weightService;
+        public AddRunningPage(IRunningSessionService runningSessionService, IWodService wodService, IWeightService weightService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
+            _weightService = weightService;
             InitializeComponent();
         }
 
@@ -58,7 +60,7 @@ namespace TrainingApp
 
         private void Return_To_RunningSessionPage(object sender, EventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService);
+            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService);
             objRunningPage.Show();
             this.Close();
         }
