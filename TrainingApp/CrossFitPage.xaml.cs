@@ -85,6 +85,13 @@ namespace TrainingApp
             this.Close();
         }
 
+        private void Navigate_To_EatingPage(object sender, RoutedEventArgs e)
+        {
+            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService);
+            objEatingPage.Show();
+            this.Close();
+        }
+
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
             try
