@@ -26,11 +26,13 @@ namespace TrainingApp.UIComponents
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
-        public UCRunningSession(IRunningSessionService runningSessionService, IWodService wodService, IWeightService weightService)
+        private readonly IStreakService _streakService;
+        public UCRunningSession(IRunningSessionService runningSessionService, IWodService wodService, IWeightService weightService, IStreakService streakService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             _weightService = weightService;
+            _streakService = streakService;
             InitializeComponent();
             DataContext = this;
             Loaded += UCRunningSession_Loaded;
@@ -55,7 +57,7 @@ namespace TrainingApp.UIComponents
                 if(runningSessionToDelete != null)
                 {
                     _runningSessionService.DeleteRunningSession(runningSession);
-                    RunningPage runningPage = new RunningPage(_runningSessionService, _wodService, _weightService);
+                    RunningPage runningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService);
                     runningPage.Show();
                     ParentWindow?.Close();
                 }

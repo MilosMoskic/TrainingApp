@@ -48,6 +48,8 @@ namespace TrainingApp
             services.AddScoped<IRunningSessionValidationService, RunningSessionValidationService>();
             services.AddScoped<IWeightRepository, WeightRepository>();
             services.AddScoped<IWeightService, WeightService>();
+            services.AddScoped<IStreakRepository, StreakRepository>();
+            services.AddScoped<IStreakService, StreakService>();
             services.AddTransient<Dashboard>();
             services.AddTransient<AddWodPage>();
         }

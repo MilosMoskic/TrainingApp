@@ -17,6 +17,7 @@ namespace TrainingApp.Infastructure.Context
         public DbSet<Wod> Wods { get; set; }
         public DbSet<RunningSession> RunningSessions { get; set; }
         public DbSet<Weight> Weights { get; set; }
+        public DbSet<EatingStreak> EatingStreaks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlServer("Server=DESKTOP-ID96S2G\\SQLEXPRESS;Database=TrainingApp;Trusted_Connection=True;Encrypt=false;TrustServerCertificate=true;");

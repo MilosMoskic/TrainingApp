@@ -20,34 +20,44 @@ namespace TrainingApp
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
-        public Dashboard(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService)
+        private readonly IStreakService _streakService;
+        public Dashboard(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             _weightService = weightService;
+            _streakService = streakService;
             InitializeComponent();
         }
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService);
             objCrossFitPage.Show();
             this.Close();
         }
 
         private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService);
+            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService);
             objRunningPage.Show();
             this.Close();
         }
 
-        private void Navigate_ToWeight_Page(object sender, RoutedEventArgs e)
+        private void Navigate_ToWeightPage(object sender, RoutedEventArgs e)
         {
-            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService);
+            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService, _streakService);
             objWeightPage.Show();
             this.Close();
         }
+
+        private void Navigate_EatingPage(object sender, RoutedEventArgs e)
+        {
+            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService);
+            objEatingPage.Show();
+            this.Close();
+        }
+
         private void CloseApp(object sender, MouseButtonEventArgs e)
         {
             try

@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\firecolor.jfif.png" />
+    <None Remove="images\firenocolor.jfif.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
@@ -24,6 +29,11 @@
   <ItemGroup>
     <ProjectReference Include="..\TrainingApp.Application\TrainingApp.Aplication.csproj" />
     <ProjectReference Include="..\TrainingApp.Infastructure\TrainingApp.Infastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\firecolor.jfif.png" />
+    <Resource Include="images\firenocolor.jfif.png" />
   </ItemGroup>
 
 </Project>

@@ -25,11 +25,13 @@ namespace TrainingApp
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
-        public WodDetailsPage(Wod wod, IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService)
+        private readonly IStreakService _streakService;
+        public WodDetailsPage(Wod wod, IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             _weightService = weightService;
+            _streakService = streakService;
             InitializeComponent();
             DataContext = wod;
         }
@@ -47,7 +49,7 @@ namespace TrainingApp
         {
             if (DataContext is Wod wod)
             {
-                UpdateWodPage objUpdateWodPage = new UpdateWodPage(wod, _wodService, _runningSessionService, _weightService);
+                UpdateWodPage objUpdateWodPage = new UpdateWodPage(wod, _wodService, _runningSessionService, _weightService, _streakService);
                 objUpdateWodPage.Show();
                 this.Close();
             }
@@ -55,7 +57,7 @@ namespace TrainingApp
 
         private void Return_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService);
             objCrossFitPage.Show();
             this.Close();
         }
