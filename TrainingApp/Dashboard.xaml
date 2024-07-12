@@ -122,7 +122,7 @@
                    Margin="609,174,37,0"/>
         <Rectangle HorizontalAlignment="Left" Height="192" Margin="230,245,0,0" Stroke="Black" Fill="#FF003C43" VerticalAlignment="Top" Width="189" RadiusX="29.5" RadiusY="29.5"/>
         <Label x:Name="RandomWodLabel" Content="Random Wod: " HorizontalAlignment="Left" Margin="259,245,0,0" Foreground="#FFE3FEF7" FontSize="20" VerticalAlignment="Top"/>
-        <TextBlock x:Name="WodTextBlock" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,285,0,0" Foreground="White" FontSize="16" TextWrapping="Wrap" Width="150" MaxHeight="120" TextTrimming="WordEllipsis"/>
+        <TextBlock x:Name="WodTextBlock" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,285,0,0" Foreground="White" FontSize="16" TextWrapping="Wrap" Width="150" MaxHeight="120" TextTrimming="WordEllipsis" MouseLeftButtonDown="Go_To_WodDetails"/>
         <Button Style="{DynamicResource ButtonStyle1}" Content="Random" HorizontalAlignment="Left" Margin="283,400,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="Generate_Random_WOD"/>
     </Grid>
 </Window>

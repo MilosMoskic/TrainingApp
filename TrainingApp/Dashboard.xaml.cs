@@ -18,6 +18,8 @@ namespace TrainingApp
         private readonly IStreakService _streakService;
 
         public decimal CurrentWeightValue { get; private set; }
+        private Wod currentRandomWod { get; set; }
+        private bool isNavigating = false;
 
         public Dashboard(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
         {
@@ -48,12 +50,11 @@ namespace TrainingApp
                 values.Add(entry.WeightAmount);
             }
 
-            // Update Y-axis range
             var maxWeight = (int)Math.Ceiling(values.Max());
             var minWeight = (int)Math.Floor(values.Min());
 
-            var yAxisMax = maxWeight + 25; // Adjust to your desired range, e.g., 100
-            var yAxisMin = minWeight - 25; // Adjust to your desired range, e.g., 50
+            var yAxisMax = maxWeight + 25;
+            var yAxisMin = minWeight - 25;
 
             WeightChart.AxisY.Clear();
             WeightChart.AxisY.Add(new Axis
@@ -61,8 +62,8 @@ namespace TrainingApp
                 Title = "Weight",
                 MinValue = yAxisMin,
                 MaxValue = yAxisMax,
-                LabelFormatter = value => value.ToString(), // Format labels as integers
-                Separator = new LiveCharts.Wpf.Separator() // Optional: Customize separator if needed
+                LabelFormatter = value => value.ToString(),
+                Separator = new LiveCharts.Wpf.Separator()
             });
 
             WeightChart.Series = new SeriesCollection
@@ -73,8 +74,8 @@ namespace TrainingApp
                     Values = values,
                     PointGeometrySize = 15,
                     StrokeThickness = 3,
-                    Fill = System.Windows.Media.Brushes.Transparent, // Ensure series fill is transparent
-                    Stroke = System.Windows.Media.Brushes.Blue // Adjust stroke color if needed
+                    Fill = System.Windows.Media.Brushes.Transparent,
+                    Stroke = System.Windows.Media.Brushes.Blue
                 }
             };
 
@@ -83,25 +84,21 @@ namespace TrainingApp
             {
                 Title = "Date",
                 Labels = dates,
-                Separator = new LiveCharts.Wpf.Separator() // Optional: Customize separator if needed
+                Separator = new LiveCharts.Wpf.Separator()
             });
         }
 
         private void GetLastWeightEntry()
         {
-            // Retrieve all weight entries
             var weightEntries = _weightService.GetAllWeights();
 
-            // Find the last inserted weight entry
             var lastWeightEntry = weightEntries.OrderByDescending(e => e.Date).FirstOrDefault();
 
             if (lastWeightEntry != null)
             {
-                // Update the current weight value
                 CurrentWeightValue = lastWeightEntry.WeightAmount;
 
-                // Update the label text directly
-                CurrentWeightLabel.Content = $"{CurrentWeightValue} kg"; // Adjust label content as needed
+                CurrentWeightLabel.Content = $"{CurrentWeightValue} kg";
             }
         }
 
@@ -135,24 +132,36 @@ namespace TrainingApp
 
         private void DisplayRandomWod()
         {
-            var randomWod = _wodService.GetRandomWod();
+            currentRandomWod = _wodService.GetRandomWod();
 
-            if (randomWod != null)
+            if (currentRandomWod != null)
             {
                 RandomWodLabel.Content = $"Random Wod:";
-                WodTextBlock.Text = FormatWodText(randomWod.WOD); // Adjust this line to format the WOD description as needed
+                WodTextBlock.Text = FormatWodText(currentRandomWod.WOD);
             }
             else
             {
                 RandomWodLabel.Content = "Random Wod:";
                 WodTextBlock.Text = " No WODs available";
             }
+
+            WodTextBlock.MouseLeftButtonDown += Go_To_WodDetails;
+        }
+
+        private void Go_To_WodDetails(object sender, MouseButtonEventArgs e)
+        {
+            if (!isNavigating && currentRandomWod != null)
+            {
+                isNavigating = true;
+
+                WodDetailsPage wodDetailsPage = new WodDetailsPage(currentRandomWod, _wodService, _runningSessionService, _weightService, _streakService);
+                wodDetailsPage.Show();
+                this.Close();
+            }
         }
 
         private string FormatWodText(string description)
         {
-            // Format the WOD description if needed (e.g., add line breaks, truncate text)
-            // Example: adding line breaks every 50 characters
             const int maxLength = 50;
             if (description.Length > maxLength)
             {
