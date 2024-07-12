@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Domain.Models;
 
@@ -29,6 +30,8 @@ namespace TrainingApp
 
             GetLastWeightEntry();
             LoadWeightChart();
+            LoadImage();
+            LoadStreak();
         }
 
         private void LoadWeightChart()
@@ -99,6 +102,34 @@ namespace TrainingApp
                 // Update the label text directly
                 CurrentWeightLabel.Content = $"{CurrentWeightValue} kg"; // Adjust label content as needed
             }
+        }
+
+        private void LoadImage()
+        {
+            if (_streakService.CalculateCurrentStreak() == 0)
+            {
+                ChangeImage("pack://application:,,,/images/firenocolor.jfif.png");
+            }
+            else
+            {
+                ChangeImage("pack://application:,,,/images/firecolor.jfif.png");
+            }
+        }
+
+        private void ChangeImage(string imagePath)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+            bitmap.EndInit();
+            DynamicImage.Source = bitmap;
+        }
+
+        private void LoadStreak()
+        {
+            int currentStreak = _streakService.CalculateCurrentStreak();
+            string dayOrDays = currentStreak == 1 ? "day" : "days";
+            StreakTextBlock.Text = $"Current Streak: {currentStreak} {dayOrDays}";
         }
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)

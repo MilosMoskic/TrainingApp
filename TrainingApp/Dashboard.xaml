@@ -27,8 +27,8 @@
         <Button x:Name="Weight" Content="Weight" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_ToWeightPage"/>
         <Button x:Name="Eating" Content="Eating" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,245,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_EatingPage"/>
         <!-- Styled Cartesian Chart -->
-        <Rectangle HorizontalAlignment="Center" Height="195" Margin="0,21,0,0" Stroke="Black" VerticalAlignment="Top" Fill="#FF003C43" Width="340" RadiusX="32.5" RadiusY="32.5"/>
-        <lvc:CartesianChart Name="WeightChart" HorizontalAlignment="Center" Height="150" Margin="0,50,0,0" VerticalAlignment="Top" Width="300" Background="#FF135D66" Foreground="Black">
+        <Rectangle HorizontalAlignment="Center" Height="195" Margin="0,33,0,0" Stroke="Black" VerticalAlignment="Top" Fill="#FF003C43" Width="340" RadiusX="32.5" RadiusY="32.5"/>
+        <lvc:CartesianChart Name="WeightChart" HorizontalAlignment="Center" Height="150" Margin="0,63,0,0" VerticalAlignment="Top" Width="300" Background="#FF135D66" Foreground="Black">
             <lvc:CartesianChart.Series>
                 <lvc:LineSeries Title="Weight" Values="{Binding WeightValues}" Stroke="#FF3B8BEB" Fill="#3B8BE3" PointGeometrySize="15" StrokeThickness="3">
                     <lvc:LineSeries.PointGeometry>
@@ -51,9 +51,17 @@
                 </lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="298,16,0,0" VerticalAlignment="Top">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="285,26,0,0" VerticalAlignment="Top">
             <Label Content="Current Weight:" Foreground="#FFE3FEF7" FontSize="20" Width="148"/>
             <Label x:Name="CurrentWeightLabel" Content="{Binding CurrentWeightValue}" Foreground="#FFE3FEF7" FontSize="20" Width="107"/>
         </StackPanel>
+        <Rectangle HorizontalAlignment="Left" Height="192" Margin="591,36,0,0" Stroke="Black" Fill="#FF003C43" VerticalAlignment="Top" Width="189" RadiusX="29.5" RadiusY="29.5"/>
+        <Rectangle HorizontalAlignment="Left" Height="100" Margin="636,63,0,0" Stroke="Black" VerticalAlignment="Top" Fill="#FF135D66" Width="100" RadiusX="14.967" RadiusY="14.967"/>
+        <Image x:Name="DynamicImage" Source="images/firenocolor.jfif.png" Margin="647,72,75,303" />
+        <TextBlock x:Name="StreakTextBlock" 
+                   FontSize="16" 
+                   Foreground="White" 
+                   VerticalAlignment="Top" 
+                   Margin="609,174,37,0"/>
     </Grid>
 </Window>

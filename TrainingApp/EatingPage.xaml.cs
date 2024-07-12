@@ -48,7 +48,8 @@ namespace TrainingApp
         private void LoadStreak()
         {
             int currentStreak = _streakService.CalculateCurrentStreak();
-            StreakTextBlock.Text = $"Current Streak: {currentStreak} days";
+            string dayOrDays = currentStreak == 1 ? "day" : "days";
+            StreakTextBlock.Text = $"Current Streak: {currentStreak} {dayOrDays}";
         }
 
         private void IncreaseStreak_Click(object sender, RoutedEventArgs e)
