@@ -20,6 +20,7 @@ namespace TrainingApp
         public decimal CurrentWeightValue { get; private set; }
         private Wod currentRandomWod { get; set; }
         private bool isNavigating = false;
+        public decimal? TotalCalories { get; set; }
 
         public Dashboard(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
         {
@@ -35,6 +36,7 @@ namespace TrainingApp
             LoadImage();
             LoadStreak();
             DisplayRandomWod();
+            DisplayTotalCalories();
         }
 
         private void LoadWeightChart()
@@ -179,6 +181,25 @@ namespace TrainingApp
         private void Generate_Random_WOD(object sender, EventArgs e)
         {
             DisplayRandomWod();
+        }
+
+        public void DisplayTotalCalories()
+        {
+            TotalCalories = CalculateTotalCaloriesOfRunningSessions();
+            TotalCaloriesValueLabel.Content = TotalCalories.HasValue ? $"{TotalCalories} calories" : "N/A";
+        }
+
+        public decimal? CalculateTotalCaloriesOfRunningSessions()
+        {
+            decimal? totalCalories = 0;
+            var runningSessions = _runningSessionService.GetAllRunningSessions();
+
+            foreach (var session in runningSessions)
+            {
+                totalCalories += session.Cal;
+            }
+
+            return totalCalories;
         }
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
