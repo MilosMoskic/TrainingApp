@@ -27,6 +27,19 @@ namespace TrainingApp.Aplication.Services
                 .ToList();
         }
 
+        public Wod GetRandomWod()
+        {
+            var allWods = _wodRepository.GetAllWods().ToList();
+
+            if (!allWods.Any())
+                return null;
+
+            Random random = new Random();
+            int randomIndex = random.Next(0, allWods.Count);
+
+            return allWods[randomIndex];
+        }
+
         public Wod UpdateWod(Wod wod)
         {
             wod.ModifiedAt = DateTime.Now;

@@ -32,6 +32,7 @@ namespace TrainingApp
             LoadWeightChart();
             LoadImage();
             LoadStreak();
+            DisplayRandomWod();
         }
 
         private void LoadWeightChart()
@@ -130,6 +131,45 @@ namespace TrainingApp
             int currentStreak = _streakService.CalculateCurrentStreak();
             string dayOrDays = currentStreak == 1 ? "day" : "days";
             StreakTextBlock.Text = $"Current Streak: {currentStreak} {dayOrDays}";
+        }
+
+        private void DisplayRandomWod()
+        {
+            var randomWod = _wodService.GetRandomWod();
+
+            if (randomWod != null)
+            {
+                RandomWodLabel.Content = $"Random Wod:";
+                WodTextBlock.Text = FormatWodText(randomWod.WOD); // Adjust this line to format the WOD description as needed
+            }
+            else
+            {
+                RandomWodLabel.Content = "Random Wod:";
+                WodTextBlock.Text = " No WODs available";
+            }
+        }
+
+        private string FormatWodText(string description)
+        {
+            // Format the WOD description if needed (e.g., add line breaks, truncate text)
+            // Example: adding line breaks every 50 characters
+            const int maxLength = 50;
+            if (description.Length > maxLength)
+            {
+                List<string> lines = new List<string>();
+                for (int i = 0; i < description.Length; i += maxLength)
+                {
+                    int length = Math.Min(maxLength, description.Length - i);
+                    lines.Add(description.Substring(i, length));
+                }
+                return string.Join(Environment.NewLine, lines);
+            }
+            return description;
+        }
+
+        private void Generate_Random_WOD(object sender, EventArgs e)
+        {
+            DisplayRandomWod();
         }
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
