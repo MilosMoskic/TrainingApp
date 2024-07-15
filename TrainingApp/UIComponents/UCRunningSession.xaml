@@ -26,4 +26,5 @@
         <Label Content="Delete" HorizontalAlignment="Left" Margin="153,0,0,0" VerticalAlignment="Center" Foreground="Red" MouseLeftButtonDown="DeleteRunningSession"/>
 
     </Grid>
+    
 </UserControl>

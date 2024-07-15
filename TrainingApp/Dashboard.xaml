@@ -77,7 +77,8 @@
         <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" MouseLeftButtonDown="CloseApp" ToolTip="Close" Cursor="Hand"/>
         <Ellipse Fill="Yellow" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,40,0" MouseLeftButtonDown="MinimizeApp" ToolTip="Minimize" Cursor="Hand"/>
         <Rectangle HorizontalAlignment="Left" Height="430" Margin="10,0,0,0" VerticalAlignment="Center" Width="200" Fill="#FF003C43" RadiusX="28.955" RadiusY="28.955"/>
-        <Label x:Name="Title" Content="Training App" HorizontalAlignment="Left" Height="33" Margin="50,20,0,0" VerticalAlignment="Top" Width="120" FontSize="20" FontFamily="Bahnschrift" Foreground="#FFE3FEF7"/>
+        <Border Height="2" Background="#FF135D66" Margin="38,51,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="144"/>
+        <Label x:Name="Title" Content="Training App" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,20,0,0" Width="144" Height="43" FontSize="24" FontFamily="Bahnschrift" Foreground="#FFE3FEF7" Padding="0,0,0,5"/>
         <Button x:Name="Dashboard1" Content="Dashboard" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,106,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="#FF135D66" FontSize="20" FontFamily="Bahnschrift"/>
         <Button x:Name="CrossFit" Content="CrossFit" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,141,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_To_CrossFitPage"/>
         <Button x:Name="Running" Content="Running" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,176,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_To_RunningPage"/>
@@ -113,6 +114,7 @@
             <Label x:Name="CurrentWeightLabel" Content="{Binding CurrentWeightValue}" Foreground="#FFE3FEF7" FontSize="20" Width="107"/>
         </StackPanel>
         <Rectangle HorizontalAlignment="Left" Height="192" Margin="591,36,0,0" Stroke="Black" Fill="#FF003C43" VerticalAlignment="Top" Width="189" RadiusX="29.5" RadiusY="29.5"/>
+        <Label Content="Healthy Eating Streak" HorizontalAlignment="Left" Margin="603,32,0,0" Foreground="#FFE3FEF7" FontSize="16"  VerticalAlignment="Top"/>
         <Rectangle HorizontalAlignment="Left" Height="100" Margin="636,63,0,0" Stroke="Black" VerticalAlignment="Top" Fill="#FF135D66" Width="100" RadiusX="14.967" RadiusY="14.967"/>
         <Image x:Name="DynamicImage" Source="images/firenocolor.jfif.png" Margin="647,72,75,303" />
         <TextBlock x:Name="StreakTextBlock" 
@@ -125,11 +127,24 @@
         <TextBlock x:Name="WodTextBlock" Text="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="240,282,0,0" Foreground="White" FontSize="16" TextWrapping="Wrap" Width="150" MaxHeight="120" TextTrimming="WordEllipsis" MouseLeftButtonDown="Go_To_WodDetails"/>
         <Button Style="{DynamicResource ButtonStyle1}" Content="Random" HorizontalAlignment="Left" Margin="273,398,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="Generate_Random_WOD"/>
         <Rectangle HorizontalAlignment="Left" Height="192" Margin="423,245,0,0" Stroke="Black" Fill="#FF003C43" VerticalAlignment="Top" Width="170" RadiusX="29.5" RadiusY="29.5"/>
+        <Label Content="Running" HorizontalAlignment="Left" Margin="474,239,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
         <Rectangle HorizontalAlignment="Left" Height="100" Margin="458,270,0,0" Stroke="Black" VerticalAlignment="Top" Fill="#FF135D66" Width="100" RadiusX="14.967" RadiusY="14.967"/>
         <Image x:Name="RunningMan" Source="images/manrunning.jfif.png" Margin="468,278,252,88" />
         <Label x:Name="TotalCaloriesLabel" Content="Total Calories Burned:" HorizontalAlignment="Left" Margin="427,370,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
         <Label x:Name="TotalCaloriesValueLabel" Content="{Binding TotalCalories}" HorizontalAlignment="Left" Margin="452,398,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
         <Rectangle HorizontalAlignment="Left" Height="192" Margin="610,245,0,0" Stroke="Black" Fill="#FF003C43" VerticalAlignment="Top" Width="170" RadiusX="29.5" RadiusY="29.5"/>
-        <Label Content="Running" HorizontalAlignment="Left" Margin="474,239,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <Label Content="Calorie maintainance" HorizontalAlignment="Left" Margin="621,250,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <Label Content="Calories:" HorizontalAlignment="Left" Margin="652,293,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <Label Content="Carbs:" HorizontalAlignment="Left" Margin="652,324,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <Label Content="Fats:" HorizontalAlignment="Left" Margin="652,381,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <Label Content="Protein:" HorizontalAlignment="Left" Margin="652,353,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <Label x:Name="CaloriesLabel" HorizontalAlignment="Left" Margin="716,296,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="14"/>
+        <Label x:Name="CarbsLabel" HorizontalAlignment="Left" Margin="716,328,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="14"/>
+        <Label x:Name="FatsLabel" HorizontalAlignment="Left" Margin="716,356,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="14"/>
+        <Label x:Name="ProteinLabel" HorizontalAlignment="Left" Margin="716,384,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="14"/>
+        <Image x:Name="Fire" Source="images/firecolor.jfif.png" Margin="626,295,150,130" />
+        <Image x:Name="Bread" Source="/images/bread.png" Margin="626,328,149,96" />
+        <Image x:Name="Meat" Source="/images/meat.jfif.png" Margin="615,350,139,56" RenderTransformOrigin="0.278,0.378" />
+        <Image x:Name="Fats" Source="/images/avocado.jfif.png" Margin="617,381,141,32" />
     </Grid>
 </Window>

@@ -45,10 +45,10 @@
             <Label Content="{Binding Date}" Grid.Row="2" Grid.Column="1" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
 
             <Label Content="Reps:" Grid.Row="3" Grid.Column="0" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
-            <Label Content="{Binding Reps}" Grid.Row="3" Grid.Column="1" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
+            <Label x:Name="Repstxt" Content="{Binding Reps}"  Grid.Row="3" Grid.Column="1" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
 
             <Label Content="Time:" Grid.Row="4" Grid.Column="0" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
-            <Label Content="{Binding Time}" Grid.Row="4" Grid.Column="1" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
+            <Label x:Name="Timetxt" Content="{Binding Time}" Grid.Row="4" Grid.Column="1" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
 
             <Label Content="WOD:" Grid.Row="5" Grid.Column="0" Margin="10" Foreground="#FFE3FEF7" FontSize="16"/>
             <ScrollViewer Grid.Row="5" Grid.Column="1" Margin="10" VerticalScrollBarVisibility="Auto">

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Domain.Models;
+using TrainingApp.Infastructure.Constants;
 
 namespace TrainingApp
 {
@@ -15,12 +16,14 @@ namespace TrainingApp
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
         private readonly IStreakService _streakService;
-        public UpdateWodPage(Wod wod, IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
+        private readonly INutritionService _nutritionService;
+        public UpdateWodPage(Wod wod, IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService, INutritionService nutritionService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             _weightService = weightService;
             _streakService = streakService;
+            _nutritionService = nutritionService;
 
             InitializeComponent();
             DataContext = wod;
@@ -30,11 +33,8 @@ namespace TrainingApp
 
         private void UpdateWodPage_Loaded(object sender, RoutedEventArgs e)
         {
-            string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Friday", "Saturday" };
-            string[] comboType = new[] { "For Time", "EMOM", "AMRAP", "Dt" };
-
-            Daycbx.ItemsSource = comboDay;
-            Typecbx.ItemsSource = comboType;
+            Daycbx.ItemsSource = Enum.GetValues(typeof(DaysOfWeek)).Cast<DaysOfWeek>();
+            Typecbx.ItemsSource = Enum.GetValues(typeof(WorkoutType)).Cast<WorkoutType>();
 
             if (DataContext is Wod wod)
             {
@@ -82,7 +82,7 @@ namespace TrainingApp
         {
             if (DataContext is Wod wod)
             {
-                WodDetailsPage objCrossFitPage = new WodDetailsPage(wod, _wodService, _runningSessionService, _weightService, _streakService);
+                WodDetailsPage objCrossFitPage = new WodDetailsPage(wod, _wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
                 objCrossFitPage.Show();
                 this.Close();
             }

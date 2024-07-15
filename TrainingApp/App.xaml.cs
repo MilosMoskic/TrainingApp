@@ -46,10 +46,13 @@ namespace TrainingApp
             services.AddScoped<IRunningSessionService, RunningSessionService>();
             services.AddScoped<IWodValidationService, WodValidationService>();
             services.AddScoped<IRunningSessionValidationService, RunningSessionValidationService>();
+            services.AddScoped<INutritionValidationService, NutritionValidationService>();
             services.AddScoped<IWeightRepository, WeightRepository>();
             services.AddScoped<IWeightService, WeightService>();
             services.AddScoped<IStreakRepository, StreakRepository>();
             services.AddScoped<IStreakService, StreakService>();
+            services.AddScoped<INutritionService, NutritionService>();
+            services.AddScoped<INutritionRepository, NutritionRepository>();
             services.AddTransient<Dashboard>();
             services.AddTransient<AddWodPage>();
         }

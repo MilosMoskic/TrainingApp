@@ -13,12 +13,14 @@ namespace TrainingApp
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
         private readonly IStreakService _streakService;
-        public EatingPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
+        private readonly INutritionService _nutritionService;
+        public EatingPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService, INutritionService nutritionService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             _weightService = weightService;
             _streakService = streakService;
+            _nutritionService = nutritionService;
             InitializeComponent();
             LoadStreak();
             LoadImage();
@@ -93,28 +95,28 @@ namespace TrainingApp
 
         private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
-            Dashboard objDashboard = new Dashboard(_wodService, _runningSessionService, _weightService, _streakService);
+            Dashboard objDashboard = new Dashboard(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objDashboard.Show();
             this.Close();
         }
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objCrossFitPage.Show();
             this.Close();
         }
 
         private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService);
+            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService, _nutritionService);
             objRunningPage.Show();
             this.Close();
         }
 
         private void Navigate_ToWeightPage(object sender, RoutedEventArgs e)
         {
-            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService, _streakService);
+            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objWeightPage.Show();
             this.Close();
         }

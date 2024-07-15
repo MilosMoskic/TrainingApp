@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,8 @@ namespace TrainingApp
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
         private readonly IStreakService _streakService;
-        public CrossFitPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
+        private readonly INutritionService _nutritionService;
+        public CrossFitPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService, INutritionService nutritionService)
         {
             if (wodService == null) throw new ArgumentNullException(nameof(wodService));
 
@@ -34,6 +36,7 @@ namespace TrainingApp
             _wodService = wodService;
             _weightService = weightService;
             _streakService = streakService;
+            _nutritionService = nutritionService;
             InitializeComponent();
             PopulateWods();
         }
@@ -45,8 +48,15 @@ namespace TrainingApp
                 List<Wod> wods = _wodService.GetAllWods(); // Assuming GetAllWods() fetches data from repository
                 foreach (var wod in wods)
                 {
-                    UCWods ucWod = new UCWods(_wodService, _runningSessionService, _weightService, _streakService);
+                    UCWods ucWod = new UCWods(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
                     ucWod.DataContext = wod; // Set DataContext of each UCWods instance to a Wod object
+
+                    // Handle null values directly
+                    if (string.IsNullOrEmpty(wod.Time))
+                        ucWod.Time = "N/A";
+                    if (wod.Reps == null || wod.Reps == 0)
+                        ucWod.Reps = "N/A";
+
                     ucWod.ParentWindow = this;
                     WodsListView.Items.Add(ucWod); // Add UCWods to the ListView
                 }
@@ -59,35 +69,35 @@ namespace TrainingApp
 
         private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
-            Dashboard objDashboardPage = new Dashboard(_wodService, _runningSessionService, _weightService, _streakService);
+            Dashboard objDashboardPage = new Dashboard(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objDashboardPage.Show();
             this.Close();
         }
 
         private void Navigate_To_AddWodPage(object sender, EventArgs e)
         {
-            AddWodPage objAddWodPage = new AddWodPage(_wodService, _runningSessionService, _weightService, _streakService);
+            AddWodPage objAddWodPage = new AddWodPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objAddWodPage.Show();
             this.Close();
         }
 
         private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService,_wodService, _weightService, _streakService);
+            RunningPage objRunningPage = new RunningPage(_runningSessionService,_wodService, _weightService, _streakService, _nutritionService);
             objRunningPage.Show();
             this.Close();
         }
 
         private void Navigate_ToWeightPage(object sender, RoutedEventArgs e)
         {
-            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService, _streakService);
+            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objWeightPage.Show();
             this.Close();
         }
 
         private void Navigate_To_EatingPage(object sender, RoutedEventArgs e)
         {
-            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService);
+            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objEatingPage.Show();
             this.Close();
         }

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Domain.Models;
+using TrainingApp.Infastructure.Constants;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TrainingApp
@@ -27,19 +28,19 @@ namespace TrainingApp
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
         private readonly IStreakService _streakService;
-        public AddWodPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
+        private readonly INutritionService _nutritionService;
+        public AddWodPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService, INutritionService nutritionService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             _weightService = weightService;
             _streakService = streakService;
+            _nutritionService = nutritionService;
             InitializeComponent();
 
-            string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Friday", "Saturday" };
-            string[] comboType = new[] { "For Time", "EMOM", "AMRAP", "Dt" };
 
-            Daycbx.ItemsSource = comboDay;
-            Typecbx.ItemsSource = comboType;
+            Daycbx.ItemsSource = Enum.GetValues(typeof(DaysOfWeek)).Cast<DaysOfWeek>();
+            Typecbx.ItemsSource = Enum.GetValues(typeof(WorkoutType)).Cast<WorkoutType>();
         }
 
         public void AddWod_Click(object sender, RoutedEventArgs e)
@@ -58,7 +59,14 @@ namespace TrainingApp
             wod.Type = Typecbx.Text;
             wod.Date = DateTime.Parse(Datedp.Text);
             wod.WOD = WODtxt.Text;
-            wod.Time = Timetxt.Text;
+            if(Timetxt.Text == "")
+            {
+                wod.Time = null;
+            }
+            else
+            {
+                wod.Time = Timetxt.Text;
+            }
 
             if(Repstxt.Text == null)
             {
@@ -74,7 +82,7 @@ namespace TrainingApp
 
         private void Return_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objCrossFitPage.Show();
             this.Close();
         }

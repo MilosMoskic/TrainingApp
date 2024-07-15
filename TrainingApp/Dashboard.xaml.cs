@@ -16,18 +16,20 @@ namespace TrainingApp
         private readonly IWodService _wodService;
         private readonly IWeightService _weightService;
         private readonly IStreakService _streakService;
+        private readonly INutritionService _nutritionService;
 
         public decimal CurrentWeightValue { get; private set; }
         private Wod currentRandomWod { get; set; }
         private bool isNavigating = false;
         public decimal? TotalCalories { get; set; }
 
-        public Dashboard(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
+        public Dashboard(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService, INutritionService nutritionService)
         {
             _runningSessionService = runningSessionService;
             _wodService = wodService;
             _weightService = weightService;
             _streakService = streakService;
+            _nutritionService = nutritionService;
 
             InitializeComponent();
 
@@ -37,6 +39,7 @@ namespace TrainingApp
             LoadStreak();
             DisplayRandomWod();
             DisplayTotalCalories();
+            CalorieMaintainceDisplay();
         }
 
         private void LoadWeightChart()
@@ -156,7 +159,7 @@ namespace TrainingApp
             {
                 isNavigating = true;
 
-                WodDetailsPage wodDetailsPage = new WodDetailsPage(currentRandomWod, _wodService, _runningSessionService, _weightService, _streakService);
+                WodDetailsPage wodDetailsPage = new WodDetailsPage(currentRandomWod, _wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
                 wodDetailsPage.Show();
                 this.Close();
             }
@@ -202,30 +205,52 @@ namespace TrainingApp
             return totalCalories;
         }
 
+        private void CalorieMaintainceDisplay()
+        {
+            var nutritionEntries = _nutritionService.GetAllNutritions();
+            var lastNutritionEntry = nutritionEntries.OrderByDescending(n => n.Id).FirstOrDefault();
+
+            if (lastNutritionEntry != null)
+            {
+                CaloriesLabel.Content = $"{lastNutritionEntry.Calories:F2}g";
+                CarbsLabel.Content = $"{lastNutritionEntry.Carbs:F2}g";
+                FatsLabel.Content = $"{lastNutritionEntry.Fat:F2}g";
+                ProteinLabel.Content = $"{lastNutritionEntry.Protein:F2}g";
+            }
+            else
+            {
+                // Clear the labels if there is no data
+                CaloriesLabel.Content = "N/A";
+                CarbsLabel.Content = "N/A";
+                FatsLabel.Content = "N/A";
+                ProteinLabel.Content = "N/A";
+            }
+        }
+
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objCrossFitPage.Show();
             this.Close();
         }
 
         private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService);
+            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService, _nutritionService);
             objRunningPage.Show();
             this.Close();
         }
 
         private void Navigate_ToWeightPage(object sender, RoutedEventArgs e)
         {
-            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService, _streakService);
+            WeightPage objWeightPage = new WeightPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objWeightPage.Show();
             this.Close();
         }
 
         private void Navigate_EatingPage(object sender, RoutedEventArgs e)
         {
-            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService);
+            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objEatingPage.Show();
             this.Close();
         }

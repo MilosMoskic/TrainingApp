@@ -72,22 +72,34 @@
         <Ellipse Fill="Red" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" MouseLeftButtonDown="CloseApp" ToolTip="Close" Cursor="Hand"/>
         <Ellipse Fill="Yellow" Grid.Row="0" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,40,0" MouseLeftButtonDown="MinimizeApp" ToolTip="Minimize" Cursor="Hand"></Ellipse>
         <Rectangle HorizontalAlignment="Left" Height="430" Margin="10,0,0,0" VerticalAlignment="Center" Width="200" Fill="#FF003C43" RadiusX="28.955" RadiusY="28.955"/>
-        <Label x:Name="Title" Content="Training App" HorizontalAlignment="Left" Height="33" Margin="50,20,0,0" VerticalAlignment="Top" Width="120" FontSize="20" FontFamily="Bahnschrift" Foreground="#FFE3FEF7"/>
+        <Border Height="2" Background="#FF135D66" Margin="38,51,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="144"/>
+        <Label x:Name="Title" Content="Training App" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,20,0,0" Width="144" Height="43" FontSize="24" FontFamily="Bahnschrift" Foreground="#FFE3FEF7" Padding="0,0,0,5"/>
         <Button x:Name="Dashboard1" Content="Dashboard" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,106,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_To_DashboardPage"/>
         <Button x:Name="CrossFit" Content="CrossFit" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,141,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_To_CrossFitPage"/>
         <Button x:Name="Running" Content="Running" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,176,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_To_RunningPage"/>
         <Button x:Name="Weight" Content="Weight" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="#FF135D66" FontSize="20" FontFamily="Bahnschrift"/>
         <Button x:Name="Eating" Content="Eating" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,245,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift"  Click="Navigate_To_EatingPage"/>
         <Rectangle HorizontalAlignment="Left" Height="404" Margin="230,36,0,0" Stroke="Black" VerticalAlignment="Top" Width="560" Fill="#FF135D66" RadiusX="28.357" RadiusY="28.357"/>
-        <DataGrid x:Name="WeightsDataGrid" Margin="250,66,30,142" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+        <DataGrid x:Name="WeightsDataGrid"
+          Margin="250,66,30,202"
+          AutoGenerateColumns="False"
+          IsReadOnly="True"
+          CanUserAddRows="False"
+          GridLinesVisibility="None"
+            BorderBrush="#FF135D66"
+            BorderThickness="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Weight (kg)" Binding="{Binding WeightAmount}" Width="*"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat={}{0:yyyy-MM-dd}}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Weight (kg):" HorizontalAlignment="Center" Margin="0,329,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
-        <TextBox x:Name="Weighttxt" HorizontalAlignment="Left" Margin="465,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Style="{DynamicResource ButtonStyle1}" Content="Add" HorizontalAlignment="Left" Margin="426,397,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="AddWeight_Click"/>
-        <Button Style="{DynamicResource ButtonStyle1}" Content="Delete" HorizontalAlignment="Left" Margin="525,397,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="DeleteWeight_Click"/>
+        <Label Content="Weight (kg):" HorizontalAlignment="Left" Margin="331,253,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <TextBox x:Name="Weighttxt" HorizontalAlignment="Left" Margin="458,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Style="{DynamicResource ButtonStyle1}" Content="Add" HorizontalAlignment="Left" Margin="400,303,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="AddWeight_Click"/>
+        <Button Style="{DynamicResource ButtonStyle1}" Content="Delete" HorizontalAlignment="Left" Margin="542,303,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="DeleteWeight_Click"/>
+        <Label Content="Calculate calories to maintain your current weight:" HorizontalAlignment="Left" Margin="328,333,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="16"/>
+        <Image x:Name="DynamicImage" Source="images/calculator.png" Margin="490,369,270,53" RenderTransformOrigin="0.762,0.559" />
+        <Button Style="{DynamicResource ButtonStyle1}" Content="Calculate" HorizontalAlignment="Left" Margin="468,402,0,0" VerticalAlignment="Top" Width="84" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="CalculateCalories_Click"/>
+
     </Grid>
 </Window>

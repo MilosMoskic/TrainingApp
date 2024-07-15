@@ -26,12 +26,14 @@ namespace TrainingApp
         private readonly IRunningSessionService _runningSessionService;
         private readonly IWeightService _weightService;
         private readonly IStreakService _streakService;
-        public WeightPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService)
+        private readonly INutritionService _nutritionService;
+        public WeightPage(IWodService wodService, IRunningSessionService runningSessionService, IWeightService weightService, IStreakService streakService, INutritionService nutritionService)
         {
             _wodService = wodService;
             _runningSessionService = runningSessionService;
             _weightService = weightService;
             _streakService = streakService;
+            _nutritionService = nutritionService;
             InitializeComponent();
             updateDataGrid();
         }
@@ -87,29 +89,36 @@ namespace TrainingApp
 
         private void Navigate_To_DashboardPage(object sender, EventArgs e)
         {
-            Dashboard objDashboardPage = new Dashboard(_wodService, _runningSessionService, _weightService, _streakService);
+            Dashboard objDashboardPage = new Dashboard(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objDashboardPage.Show();
             this.Close();
         }
 
         private void Navigate_To_CrossFitPage(object sender, EventArgs e)
         {
-            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService);
+            CrossFitPage objCrossFitPage = new CrossFitPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objCrossFitPage.Show();
             this.Close();
         }
 
         private void Navigate_To_RunningPage(object sender, RoutedEventArgs e)
         {
-            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService);
+            RunningPage objRunningPage = new RunningPage(_runningSessionService, _wodService, _weightService, _streakService, _nutritionService);
             objRunningPage.Show();
             this.Close();
         }
 
         private void Navigate_To_EatingPage(object sender, RoutedEventArgs e)
         {
-            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService);
+            EatingPage objEatingPage = new EatingPage(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
             objEatingPage.Show();
+            this.Close();
+        }
+
+        private void CalculateCalories_Click(object sender, RoutedEventArgs e)
+        {
+            CalculateCaloriesPage objCalculateCaloriesPage = new CalculateCaloriesPage(_nutritionService, _wodService, _weightService, _runningSessionService, _streakService);
+            objCalculateCaloriesPage.Show();
             this.Close();
         }
 

@@ -9,10 +9,10 @@
         <Rectangle HorizontalAlignment="Center" Height="57" VerticalAlignment="Center" Width="200" Fill="#FF003C43" RadiusX="12" RadiusY="12"/>
         <StackPanel Orientation="Horizontal">
             <Rectangle HorizontalAlignment="Left" Height="57" Margin="147,0,0,0" VerticalAlignment="Center" Width="53" RadiusX="12" RadiusY="12" Fill="#FF135D66"/>
-            <!-- Example binding -->
         </StackPanel>
+
         <Label Content="Time:" HorizontalAlignment="Left" Margin="155,7,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" Height="27" Width="40"/>
-        <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="155,26,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+        <Label x:Name="Timetxt" Content="{Binding Time, TargetNullValue='N/A'}" HorizontalAlignment="Left" Margin="157,24,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
 
         <Label Content="Day:" HorizontalAlignment="Left" Width="29" Foreground="#FFE3FEF7" FontSize="10" Margin="0,0,0,34"/>
         <Label Content="{Binding Day}" HorizontalAlignment="Left" Margin="26,0,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
@@ -21,6 +21,6 @@
         <Label Content="{Binding Type}" HorizontalAlignment="Left" Margin="26,14,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
 
         <Label Content="Reps:" HorizontalAlignment="Left" Margin="0,28,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
-        <Label Content="{Binding Reps}" HorizontalAlignment="Left" Margin="26,28,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
+        <Label x:Name="Repstxt" Content="{Binding Reps, TargetNullValue='N/A'}" HorizontalAlignment="Left" Margin="26,28,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" FontSize="10"/>
     </Grid>
 </UserControl>

@@ -9,9 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\avocado.jfif.png" />
+    <None Remove="images\bread.png" />
+    <None Remove="images\calculator.png" />
     <None Remove="images\firecolor.jfif.png" />
     <None Remove="images\firenocolor.jfif.png" />
+    <None Remove="images\flexed-biceps-light-skin-tone.png" />
     <None Remove="images\manrunning.jfif.png" />
+    <None Remove="images\meat.jfif.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,9 +39,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="images\avocado.jfif.png" />
+    <Resource Include="images\bread.png" />
+    <Resource Include="images\calculator.png" />
     <Resource Include="images\firecolor.jfif.png" />
     <Resource Include="images\firenocolor.jfif.png" />
+    <Resource Include="images\flexed-biceps-light-skin-tone.png" />
     <Resource Include="images\manrunning.jfif.png" />
+    <Resource Include="images\meat.jfif.png" />
   </ItemGroup>
 
 </Project>
