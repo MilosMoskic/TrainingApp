@@ -15,6 +15,7 @@
     <None Remove="images\firecolor.jfif.png" />
     <None Remove="images\firenocolor.jfif.png" />
     <None Remove="images\flexed-biceps-light-skin-tone.png" />
+    <None Remove="images\logo.png" />
     <None Remove="images\manrunning.jfif.png" />
     <None Remove="images\meat.jfif.png" />
   </ItemGroup>
@@ -45,6 +46,7 @@
     <Resource Include="images\firecolor.jfif.png" />
     <Resource Include="images\firenocolor.jfif.png" />
     <Resource Include="images\flexed-biceps-light-skin-tone.png" />
+    <Resource Include="images\logo.png" />
     <Resource Include="images\manrunning.jfif.png" />
     <Resource Include="images\meat.jfif.png" />
   </ItemGroup>
