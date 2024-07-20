@@ -7,6 +7,7 @@ namespace TrainingApp.Aplication.Services
     public class WodService : IWodService
     {
         private readonly IWodRepository _wodRepository;
+        private Wod _previousWod;
         public WodService(IWodRepository wodRepository)
         {
             _wodRepository = wodRepository;
@@ -35,9 +36,17 @@ namespace TrainingApp.Aplication.Services
                 return null;
 
             Random random = new Random();
-            int randomIndex = random.Next(0, allWods.Count);
 
-            return allWods[randomIndex];
+            Wod selectedWod;
+            do
+            {
+                int randomIndex = random.Next(0, allWods.Count);
+                selectedWod = allWods[randomIndex];
+            } while (selectedWod == _previousWod);
+
+            _previousWod = selectedWod;
+
+            return selectedWod;
         }
 
         public Wod UpdateWod(Wod wod)

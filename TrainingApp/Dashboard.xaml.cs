@@ -189,7 +189,9 @@ namespace TrainingApp
         public void DisplayTotalCalories()
         {
             TotalCalories = CalculateTotalCaloriesOfRunningSessions();
-            TotalCaloriesValueLabel.Content = TotalCalories.HasValue ? $"{TotalCalories} calories" : "N/A";
+            TotalCaloriesValueLabel.Content = TotalCalories.HasValue
+                ? $"{Math.Round(TotalCalories.Value)} calories"
+                : "N/A";
         }
 
         public decimal? CalculateTotalCaloriesOfRunningSessions()

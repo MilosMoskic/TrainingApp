@@ -12,6 +12,15 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" BorderBrush="Black">
     <Window.Resources>
+        <Style x:Key="DisabledButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF135D66"/>
+            <Setter Property="Foreground" Value="#FFE3FEF7"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Bahnschrift"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Opacity" Value="0.5"/>
+        </Style>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -32,7 +41,8 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
         <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="Background" Value="#FF135D66"/>
+            <!-- Default Background Color -->
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -42,23 +52,34 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border x:Name="border" 
+                        CornerRadius="5" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" 
+                                      Focusable="False" 
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                      Margin="{TemplateBinding Padding}" 
+                                      RecognizesAccessKey="True" 
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="#FF135D66"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="#FF135D66"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="Background" TargetName="border" Value="#FF135D66"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
                                 <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
                             </Trigger>
@@ -79,7 +100,7 @@
         <Button x:Name="CrossFit" Content="CrossFit" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,141,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_To_CrossFitPage"/>
         <Button x:Name="Running" Content="Running" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,176,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_To_RunningPage"/>
         <Button x:Name="Weight" Content="Weight" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Bahnschrift" Click="Navigate_ToWeightPage"/>
-        <Button x:Name="Eating" Content="Eating" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,245,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="#FFE3FEF7" BorderBrush="{x:Null}" Background="#FF135D66" FontSize="20" FontFamily="Bahnschrift"/>
+        <Button x:Name="Eating" Content="Eating" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="50,245,0,0" VerticalAlignment="Top" Width="120" Height="30" Foreground="Black" Style="{StaticResource DisabledButtonStyle}"/>
 
         <Rectangle HorizontalAlignment="Left" Height="400" Margin="298,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="400" Fill="#FF003C43" RadiusX="40.333" RadiusY="40.333"/>
         <Rectangle HorizontalAlignment="Left" Height="150" Margin="425,72,0,0" Stroke="Black" VerticalAlignment="Top" Width="150" Fill="#FF135D66" RadiusX="26.366" RadiusY="26.366"/>
@@ -89,7 +110,7 @@
                    Foreground="White" 
                    VerticalAlignment="Top" 
                    Margin="378,240,182,0"/>
-        <Button Style="{DynamicResource ButtonStyle1}" Content="Increase Streak!" HorizontalAlignment="Left" Margin="430,350,0,0" VerticalAlignment="Top" Width="140" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="IncreaseStreak_Click"/>
+        <Button Style="{DynamicResource ButtonStyle1}" Content="Increase Streak!" HorizontalAlignment="Left" Margin="430,350,0,0" VerticalAlignment="Top" Width="140" Foreground="#FFE3FEF7" FontSize="16" Background="#FF003C43" Click="IncreaseStreak_Click" />
         <Label Content="Turn your food into medicine and you won't need medicines anymore!" HorizontalAlignment="Left" Margin="307,288,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7"/>
     </Grid>
 </Window>

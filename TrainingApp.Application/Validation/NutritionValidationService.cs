@@ -14,15 +14,27 @@ namespace TrainingApp.Aplication.Validation
                 return false;
             }
 
+            if (!int.TryParse(ageTextBox, out int age) || age < 1 || age > 120)
+            {
+                errorMessage = "Please enter a valid age between 1 and 120.";
+                return false;
+            }
+
             if (string.IsNullOrWhiteSpace(heightTextBox))
             {
-                errorMessage = "Please enter Height.";
+                errorMessage = "Please enter height.";
+                return false;
+            }
+
+            if (!decimal.TryParse(heightTextBox, out decimal height) || height < 1 || height > 300)
+            {
+                errorMessage = "Please enter a valid height between 1 and 300.";
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(activityLevelComboBox))
             {
-                errorMessage = "Please select a Activity Level.";
+                errorMessage = "Please select an activity level.";
                 return false;
             }
 

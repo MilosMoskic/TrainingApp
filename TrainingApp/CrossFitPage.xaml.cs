@@ -45,20 +45,19 @@ namespace TrainingApp
         {
             try
             {
-                List<Wod> wods = _wodService.GetAllWods(); // Assuming GetAllWods() fetches data from repository
+                List<Wod> wods = _wodService.GetAllWods();
                 foreach (var wod in wods)
                 {
                     UCWods ucWod = new UCWods(_wodService, _runningSessionService, _weightService, _streakService, _nutritionService);
-                    ucWod.DataContext = wod; // Set DataContext of each UCWods instance to a Wod object
+                    ucWod.DataContext = wod;
 
-                    // Handle null values directly
                     if (string.IsNullOrEmpty(wod.Time))
                         ucWod.Time = "N/A";
                     if (wod.Reps == null || wod.Reps == 0)
                         ucWod.Reps = "N/A";
 
                     ucWod.ParentWindow = this;
-                    WodsListView.Items.Add(ucWod); // Add UCWods to the ListView
+                    WodsListView.Items.Add(ucWod);
                 }
             }
             catch (Exception ex)
