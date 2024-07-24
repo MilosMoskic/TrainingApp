@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TrainingApp.Domain.Interfaces;
+﻿using TrainingApp.Domain.Interfaces;
 using TrainingApp.Domain.Models;
 using TrainingApp.Infastructure.Context;
 
@@ -24,11 +23,6 @@ namespace TrainingApp.Infastructure.Repositories
         public IQueryable<Wod> GetAllWods()
         {
             return _trainingContext.Wods.AsQueryable();
-        }
-
-        public Wod GetWod(int id)
-        {
-            return _trainingContext.Wods.FirstOrDefault(w => w.Id == id);
         }
 
         public Wod UpdateWod(Wod wod)

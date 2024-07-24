@@ -1,5 +1,4 @@
-﻿using System;
-using TrainingApp.Aplication.Interfaces;
+﻿using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Domain.Interfaces;
 using TrainingApp.Domain.Models;
 

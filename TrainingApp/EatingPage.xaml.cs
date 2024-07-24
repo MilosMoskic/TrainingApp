@@ -1,9 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using TrainingApp.Aplication.Interfaces;
-using TrainingApp.Aplication.Services;
 
 namespace TrainingApp
 {

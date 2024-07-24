@@ -1,5 +1,4 @@
-﻿using System;
-using TrainingApp.Domain.Models;
+﻿using TrainingApp.Domain.Models;
 
 namespace TrainingApp.Aplication.Interfaces
 {

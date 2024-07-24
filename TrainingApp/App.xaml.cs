@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
-using System.Data;
-using System;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Forms.Design;
 using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Aplication.Services;
 using TrainingApp.Domain.Interfaces;

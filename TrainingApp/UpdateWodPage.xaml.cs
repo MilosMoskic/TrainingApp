@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Aplication.Interfaces;
 using TrainingApp.Domain.Models;
 using TrainingApp.Infastructure.Constants;
