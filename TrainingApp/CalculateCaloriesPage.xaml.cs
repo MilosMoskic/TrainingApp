@@ -34,15 +34,6 @@ namespace TrainingApp
 
         private void Calculate_Calories(object sender, RoutedEventArgs e)
         {
-
-            var validationService = App.ServiceProvider.GetRequiredService<INutritionValidationService>();
-
-            if (!validationService.ValidateWodForm(Agetxt.Text, Heighttxt.Text, ActivityLevelComboBox.Text, out string errorMessage))
-            {
-                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
             string gender;
 
             if (MaleRadioButton.IsChecked == true)
@@ -56,6 +47,14 @@ namespace TrainingApp
             else
             {
                 MessageBox.Show("Please select a gender.", "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var validationService = App.ServiceProvider.GetRequiredService<INutritionValidationService>();
+
+            if (!validationService.ValidateWodForm(Agetxt.Text, Heighttxt.Text, ActivityLevelComboBox.Text, out string errorMessage))
+            {
+                MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

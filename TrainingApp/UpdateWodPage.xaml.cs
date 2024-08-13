@@ -30,8 +30,11 @@ namespace TrainingApp
 
         private void UpdateWodPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Daycbx.ItemsSource = Enum.GetValues(typeof(DaysOfWeek)).Cast<DaysOfWeek>();
-            Typecbx.ItemsSource = Enum.GetValues(typeof(WorkoutType)).Cast<WorkoutType>();
+            string[] comboDay = new[] { "Monday", "Tuesday", "Wednesday", "Friday", "Saturday" };
+            string[] comboType = new[] { "For Time", "EMOM", "AMRAP", "Dt" };
+
+            Daycbx.ItemsSource = comboDay;
+            Typecbx.ItemsSource = comboType;
 
             if (DataContext is Wod wod)
             {
@@ -40,7 +43,7 @@ namespace TrainingApp
                 Datedp.SelectedDate = wod.Date;
                 WODtxt.Text = wod.WOD;
                 Timetxt.Text = wod.Time;
-                Repstxt.Text = wod.Reps.ToString();
+                Repstxt.Text = wod.Reps?.ToString();
             }
         }
 
@@ -56,15 +59,15 @@ namespace TrainingApp
                     return;
                 }
 
-                wod.Day = Daycbx.Text;
-                wod.Type = Typecbx.Text;
-                wod.Date = DateTime.Parse(Datedp.Text);
+                wod.Day = Daycbx.SelectedItem.ToString();
+                wod.Type = Typecbx.SelectedItem.ToString();
+                wod.Date = Datedp.SelectedDate;
                 wod.WOD = WODtxt.Text;
                 wod.Time = Timetxt.Text;
 
-                if (Repstxt.Text == null)
+                if (int.TryParse(Repstxt.Text, out int reps))
                 {
-                    wod.Reps = Int32.Parse(Repstxt.Text);
+                    wod.Reps = reps;
                 }
 
                 _wodService.UpdateWod(wod);

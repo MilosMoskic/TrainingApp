@@ -24,7 +24,7 @@
         <Label Content="Update Wod" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FFE3FEF7"/>
 
         <ComboBox x:Name="Daycbx" HorizontalAlignment="Left" Margin="400,98,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FF77B0AA" 
-                  SelectedValue="{Binding Day}">
+                  SelectedItem="{Binding Day}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -35,7 +35,7 @@
         <Label Content="Day:" HorizontalAlignment="Left" Margin="288,92,0,0" VerticalAlignment="Top" Foreground="#FFE3FEF7" Width="46" FontSize="16"/>
 
         <ComboBox x:Name="Typecbx" HorizontalAlignment="Left" Margin="400,134,0,0" VerticalAlignment="Top" Width="120" BorderBrush="#FF77B0AA" 
-                  SelectedValue="{Binding Type}">
+                  SelectedItem="{Binding Type}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
